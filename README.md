@@ -1,23 +1,29 @@
-# Flutter app in Zapp!
 
-A new Flutter project built with Zapp!
+Questo progetto realizza una versione semplificata del gioco MasterMind, in cui il giocatore deve indovinare una sequenza segreta di quattro colori generata casualmente dal sistema.
+L’interfaccia è composta da quattro pulsanti principali (inizialmente grigi) e da un pulsante di verifica (“Verifica codice”) che consente di controllare se la sequenza impostata coincide con quella segreta.
 
-----
+Al click su ciascun pulsante colorato, il colore cambia ciclicamente scegliendo tra un set predefinito di colori. Dopo la verifica, i pulsanti tornano al colore grigio per permettere una nuova giocata.
 
-> To learn how to use Zapp! check out the [documentation](https://docs.zapp.run)
+Scelte di sviluppo e motivazioni
 
-----
+Semplificazione dell’esperienza di gioco:
+È stato scelto di ridurre il numero di pulsanti a 4 e i colori a un set limitato per rendere l’applicazione immediata e adatta a una dimostrazione didattica.
 
-## Getting Started
+Ciclo dei colori con click singolo:
+Un solo evento “click” per cambiare colore evita interfacce complesse e rende chiaro lo stato corrente di ogni pulsante.
 
-This project is a starting point for a Flutter application.
+Reset automatico dopo la verifica:
+La decisione di riportare i pulsanti in grigio evita confusione visiva e rende il gioco facilmente ripetibile.
 
-A few resources to get you started if this is your first Flutter project:
+Messaggi chiari e feedback immediato:
+Il risultato della verifica (esito positivo o negativo) viene mostrato subito all’utente per migliorare l’usabilità.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Istruzioni per l’esecuzione
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Clonare o scaricare la cartella del progetto.
 
+Aprire il file index.html in un browser moderno (Chrome, Firefox, Edge, Safari).
+
+Interagire con i pulsanti per impostare una sequenza e cliccare su “Verifica codice”.
+
+Il progetto ha lo scopo di mostrare una semplice applicazione interattiva basata su JavaScript, curata nella chiarezza del codice, nell’accessibilità dell’interfaccia e nella documentazione.
