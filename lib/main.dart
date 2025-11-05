@@ -54,8 +54,21 @@ class _MyHomePageState extends State<MyHomePage> {
     Colors.purple,
   ];
   
-  // Sequenza vincente
-  final Color sequenzaVincente = Colors.blue;
+  // Sequenza vincente (4 colori casuali)
+  late List<Color> sequenzaVincente;
+
+  @override
+  void initState() {
+    super.initState();
+    _generaSequenzaVincente();
+  }
+
+  void _generaSequenzaVincente() {
+    sequenzaVincente = List.generate(
+      4,
+      (index) => mastermindColors[random.nextInt(mastermindColors.length)]
+    );
+  }
 
   void _buttonNeutral(int buttonNumber) {
     setState(() {
@@ -79,17 +92,35 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   
   void _verifica() {
-    if (buttonColor1 == sequenzaVincente &&
-        buttonColor2 == sequenzaVincente &&
-        buttonColor3 == sequenzaVincente &&
-        buttonColor4 == sequenzaVincente) {
+    if (buttonColor1 == sequenzaVincente[0] &&
+        buttonColor2 == sequenzaVincente[1] &&
+        buttonColor3 == sequenzaVincente[2] &&
+        buttonColor4 == sequenzaVincente[3]) {
       // Hai vinto!
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Congratulazioni!'),
-            content: const Text('Hai vinto! Sequenza corretta!'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('Hai vinto! Sequenza corretta!'),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _colorCircle(sequenzaVincente[0]),
+                    const SizedBox(width: 8),
+                    _colorCircle(sequenzaVincente[1]),
+                    const SizedBox(width: 8),
+                    _colorCircle(sequenzaVincente[2]),
+                    const SizedBox(width: 8),
+                    _colorCircle(sequenzaVincente[3]),
+                  ],
+                ),
+              ],
+            ),
             actions: [
               TextButton(
                 onPressed: () {
@@ -100,6 +131,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     buttonColor2 = Colors.grey;
                     buttonColor3 = Colors.grey;
                     buttonColor4 = Colors.grey;
+                    // Genera nuova sequenza
+                    _generaSequenzaVincente();
                   });
                 },
                 child: const Text('OK'),
@@ -115,7 +148,27 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Riprova!'),
-            content: const Text('Sequenza non corretta.'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('Sequenza non corretta.'),
+                const SizedBox(height: 20),
+                const Text('La sequenza corretta è:'),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _colorCircle(sequenzaVincente[0]),
+                    const SizedBox(width: 8),
+                    _colorCircle(sequenzaVincente[1]),
+                    const SizedBox(width: 8),
+                    _colorCircle(sequenzaVincente[2]),
+                    const SizedBox(width: 8),
+                    _colorCircle(sequenzaVincente[3]),
+                  ],
+                ),
+              ],
+            ),
             actions: [
               TextButton(
                 onPressed: () {
@@ -128,6 +181,17 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       );
     }
+  }
+
+  Widget _colorCircle(Color color) {
+    return Container(
+      width: 30,
+      height: 30,
+      decoration: BoxDecoration(
+        color: color,
+        shape: BoxShape.circle,
+      ),
+    );
   }
 
   @override
